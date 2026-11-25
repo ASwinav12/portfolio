@@ -90,10 +90,8 @@ export function FileUpload({
         extension = 'jpg'
       }
 
-      const path = `${folder}/${Date.now()}-${safeName(file.name)}.${extension}`.replace(
-        /\.(jpg|jpeg|png|webp)\.jpg$/,
-        '.jpg',
-      )
+      const baseName = file.name.replace(/\.[^.]+$/, '') || 'file'
+      const path = `${folder}/${Date.now()}-${safeName(baseName)}.${extension}`
 
       const { error: uploadError } = await supabase.storage
         .from(bucket)
