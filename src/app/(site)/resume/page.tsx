@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { PrintButton } from '@/components/site/PrintButton'
 import { getSiteContent } from '@/lib/content'
 import { storageUrl } from '@/lib/storage'
-import { absoluteUrl } from '@/lib/utils'
+import { absoluteUrl, splitParagraphs } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Resume',
@@ -98,10 +98,7 @@ export default async function ResumePage() {
               Professional summary
             </h2>
             <div className="mt-3 space-y-3 text-[13px] leading-relaxed text-slate-300">
-              {(profile.about || '')
-                .split(/\n{2,}/)
-                .filter(Boolean)
-                .map((paragraph, index) => (
+              {splitParagraphs(profile.about).map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
             </div>

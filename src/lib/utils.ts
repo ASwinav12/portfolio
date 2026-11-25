@@ -40,3 +40,12 @@ export function truncate(value: string, length = 160) {
   if (value.length <= length) return value
   return `${value.slice(0, length).trimEnd()}…`
 }
+
+/** Splits long-form text into paragraphs, tolerating literal \n escapes. */
+export function splitParagraphs(value?: string | null) {
+  return (value ?? '')
+    .replace(/\\n/g, '\n')
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+}

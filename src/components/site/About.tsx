@@ -2,13 +2,11 @@ import { Cloud, Cpu, Mail, MapPin, Terminal, Wrench } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Reveal } from '@/components/ui/Reveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { splitParagraphs } from '@/lib/utils'
 import type { Profile } from '@/lib/types'
 
 export function About({ profile }: { profile: Profile }) {
-  const paragraphs = (profile.about || '')
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean)
+  const paragraphs = splitParagraphs(profile.about)
 
   const facts = [
     { icon: MapPin, label: 'Based in', value: profile.location || 'Kerala, India' },
